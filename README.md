@@ -1,22 +1,22 @@
 # Freelance Agent
 
-A personal project-acquisition agent that discovers, evaluates, and helps respond to freelance development and automation opportunities.
+A personal project-acquisition agent that searches for, evaluates, and helps respond to freelance development and automation opportunities.
 
 The system is intentionally broader than a single technology stack. It searches for business problems the owner can reasonably solve, evaluates delivery feasibility, suggests suitable technical approaches, and prepares honest, tailored proposals.
 
 ## Initial product goal
 
-The first working version must support this flow:
+The first useful version must support this primary flow:
 
-1. The user sends a project description or URL to a Telegram bot.
-2. The application extracts and normalizes the opportunity.
+1. A scheduled collector searches configured project sources.
+2. Results are normalized and deduplicated.
 3. An AI evaluator scores fit, risk, learning effort, and commercial value.
 4. The application suggests one or more plausible solution approaches.
-5. The result is stored in Supabase.
-6. Telegram returns a concise summary with actions.
+5. Qualified opportunities are stored in Supabase.
+6. Telegram sends concise notifications with review actions.
 7. The user can request a tailored proposal.
 
-Automatic marketplace login, scraping, messaging, and application submission are not part of the initial milestone.
+Manual project submission through Telegram is a secondary fallback and testing tool, not the main product flow.
 
 ## Planned stack
 
@@ -24,7 +24,7 @@ Automatic marketplace login, scraping, messaging, and application submission are
 - Supabase/PostgreSQL
 - Telegram Bot API
 - OpenRouter for AI models
-- Tavily for public web search
+- Tavily for initial public web search
 - Zod for runtime validation
 - Vercel or another Node-compatible host
 
