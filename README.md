@@ -27,8 +27,9 @@ Manual project submission through Telegram is a secondary fallback and testing t
 - Tavily for initial public web search
 - Zod for runtime validation
 - Vercel or another Node-compatible host
+- custom CSS and CSS Modules only
 
-n8n is not part of the core architecture.
+n8n is not part of the core architecture. Tailwind and UI frameworks are not used.
 
 ## Documentation
 
@@ -36,12 +37,13 @@ n8n is not part of the core architecture.
 - [Architecture](docs/ARCHITECTURE.md)
 - [Data model](docs/DATA_MODEL.md)
 - [Roadmap](docs/ROADMAP.md)
+- [UI and styling](docs/UI.md)
 - [Codex workflow](docs/CODEX_WORKFLOW.md)
 - [Codex task prompts](codex/)
 
 ## Development status
 
-The repository currently contains the product and implementation specification. Start with `codex/01-bootstrap.md` and complete tasks in numerical order.
+The repository contains the product and implementation specification. Start with `codex/01-build-project-agent.md`.
 
 ## Core product rule
 
