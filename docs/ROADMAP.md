@@ -22,93 +22,57 @@ Exit criteria:
 - lint, typecheck, and tests pass;
 - missing environment variables fail clearly.
 
-## Milestone 1: Database foundation
+## Milestone 1: Database and domain foundation
 
-Goal: create the persistent domain model.
+Goal: create the persistent model and source-neutral domain contracts.
 
 Deliverables:
 
 - Supabase migration files;
-- tables for profile, capabilities, portfolio, sources, opportunities, evaluations, solution options, proposals, application events, and agent runs;
+- profile, capabilities, portfolio, sources, search tracks, opportunities, evaluations, solution options, proposals, application events, and agent runs;
 - indexes and constraints;
 - typed repository layer;
-- seed/example profile data that contains no secrets.
+- source adapter interfaces;
+- search-result and evaluation schemas;
+- example profile and search-track data without secrets.
 
 Exit criteria:
 
-- migrations apply cleanly to a fresh Supabase project;
-- repository tests cover critical reads, writes, and idempotent ingestion.
+- migrations apply cleanly to a fresh project;
+- critical repositories and schemas are tested;
+- ingestion identity and duplicate rules are defined.
 
-## Milestone 2: Manual Telegram analysis
+## Milestone 2: Automatic public project search
 
-Goal: complete the first useful vertical slice.
+Goal: make the agent discover available projects without manual input.
 
 Flow:
 
 ```text
-Telegram text or public URL
-→ authorize user
-→ extract project facts
-→ normalize and deduplicate
-→ store opportunity
-→ evaluate fit
-→ suggest solution options
-→ send Telegram summary
+Scheduled request
+→ load enabled search tracks
+→ search through Tavily
+→ normalize results
+→ deduplicate
+→ apply deterministic prefilters
+→ store new candidates
 ```
-
-Deliverables:
-
-- Telegram webhook;
-- single-user authorization;
-- text and safe public-URL ingestion;
-- OpenRouter structured extraction and evaluation;
-- deterministic score adjustments;
-- Telegram result formatting;
-- inline buttons for proposal, save, reject, and details.
-
-Exit criteria:
-
-- real project text can be analyzed end to end;
-- duplicate submissions do not create duplicate records;
-- invalid AI output is handled safely;
-- login-protected URLs produce a useful fallback message.
-
-## Milestone 3: Proposal generation
-
-Goal: create honest, tailored, reviewable proposals.
-
-Deliverables:
-
-- proposal prompt and schema;
-- capability and portfolio selection;
-- proposal versioning;
-- Telegram actions for generate, shorten, revise approach, and discard;
-- no automatic sending.
-
-Exit criteria:
-
-- proposals use only verified profile and portfolio claims;
-- revisions create new versions;
-- the user can copy a clean final proposal from Telegram.
-
-## Milestone 4: Public search collector
-
-Goal: discover opportunities without manual input.
 
 Deliverables:
 
 - Tavily adapter;
 - configurable search tracks;
-- scheduled authenticated search endpoint;
-- result normalization and deduplication;
-- preliminary filtering;
-- bounded batch evaluation;
-- Telegram notification for qualifying opportunities.
+- authenticated scheduled endpoint;
+- query batching and provider limits;
+- source-result normalization;
+- duplicate detection;
+- deterministic prefilters;
+- agent-run records and structured logging.
 
-Search tracks:
+Initial search tracks:
 
 - web applications and business platforms;
-- existing application completion and repair;
+- completion or repair of existing projects;
 - CMS and content systems;
 - AI agents and workflow automation;
 - non-AI business automation;
@@ -118,12 +82,89 @@ Search tracks:
 
 Exit criteria:
 
-- searches run on schedule;
-- repeated results are not repeatedly announced;
-- provider failure does not corrupt run state;
-- low-quality results are filtered or clearly scored.
+- searches run on schedule or through a protected manual trigger;
+- real project candidates are stored;
+- repeated searches do not create duplicate opportunities;
+- provider failures do not corrupt run state.
 
-## Milestone 5: Application tracking and follow-ups
+## Milestone 3: AI extraction and evaluation
+
+Goal: turn discovered candidates into useful decisions.
+
+Deliverables:
+
+- OpenRouter provider adapter;
+- structured extraction schema and prompt;
+- structured evaluation schema and prompt;
+- direct, adjacent, learnable, and risky fit classification;
+- deterministic score adjustments;
+- one to three solution options;
+- model, prompt, usage, and evaluation metadata;
+- bounded evaluation batches.
+
+Exit criteria:
+
+- discovered projects are evaluated end to end;
+- invalid model output is handled safely;
+- obviously weak results do not consume unnecessary model calls;
+- scores and recommendations remain explainable.
+
+## Milestone 4: Telegram notification and control
+
+Goal: deliver strong matches to the owner and let the owner control their status.
+
+Deliverables:
+
+- Telegram webhook;
+- single-user authorization;
+- high-value opportunity notifications;
+- optional digest for medium-confidence opportunities;
+- inline buttons for proposal, save, reject, details, and open source;
+- prevention of repeated notifications;
+- compact operational alerts for failed runs.
+
+Exit criteria:
+
+- qualifying opportunities arrive automatically in Telegram;
+- weak and duplicate results do not create notification noise;
+- callbacks update stored state correctly;
+- unauthorized users cannot control the bot.
+
+## Milestone 5: Proposal generation
+
+Goal: create honest, tailored, reviewable proposals.
+
+Deliverables:
+
+- proposal prompt and schema;
+- verified capability and portfolio selection;
+- proposal versioning;
+- Telegram actions for generate, shorten, revise approach, and discard;
+- no automatic sending.
+
+Exit criteria:
+
+- proposals use only verified claims;
+- revisions create new versions;
+- the user can copy a clean final proposal from Telegram.
+
+## Milestone 6: Manual submission fallback
+
+Goal: support opportunities the automatic collectors did not find.
+
+Deliverables:
+
+- Telegram command or message flow for pasted project text;
+- safe public-URL submission where practical;
+- reuse of the same normalization, deduplication, evaluation, and proposal pipeline;
+- useful fallback for inaccessible listing content.
+
+Exit criteria:
+
+- manual input does not create a separate parallel architecture;
+- duplicate manual and automatic discoveries resolve to one opportunity.
+
+## Milestone 7: Application tracking and follow-ups
 
 Goal: manage the opportunity pipeline.
 
@@ -140,29 +181,29 @@ Exit criteria:
 
 - each opportunity has a visible history;
 - reminders are idempotent;
-- follow-ups remain reviewable and are never sent automatically.
+- follow-ups remain reviewable.
 
-## Milestone 6: Gmail alert collector
+## Milestone 8: Alert-email collector
 
-Goal: process authenticated-platform alerts without marketplace scraping.
+Goal: add projects from services that deliver results to the user's inbox.
 
 Deliverables:
 
 - Google OAuth setup;
-- restricted Gmail queries or label-based ingestion;
-- sender-specific parsers where useful;
-- generic AI fallback parser;
-- deduplication with opportunities from other sources.
+- restricted label or query-based ingestion;
+- source-specific parsers where useful;
+- generic structured fallback parser;
+- deduplication with opportunities from public search.
 
 Exit criteria:
 
 - only configured messages are read;
-- processed email identity is stored;
+- processed message identity is stored;
 - repeated polling does not duplicate opportunities.
 
-## Milestone 7: Minimal dashboard
+## Milestone 9: Minimal dashboard
 
-Goal: provide a better overview once real usage clarifies requirements.
+Goal: provide a better overview after the Telegram workflows have been tested with real opportunities.
 
 Possible features:
 
@@ -170,28 +211,23 @@ Possible features:
 - filtering and search;
 - detail and evaluation views;
 - proposal editor;
-- profile, capability, portfolio, and search-track settings;
+- profile, capability, portfolio, source, and search-track settings;
 - run history and errors.
-
-Do not build this milestone before the Telegram workflows have been used with real opportunities.
 
 ## Future options
 
-- browser extension to send the current authenticated listing to the agent;
-- official marketplace APIs where permitted;
+- additional supported source adapters;
+- browser helper for sending the current listing to the agent;
 - employer/job-agent mode;
 - proactive company lead discovery;
 - contact enrichment;
 - pricing assistant;
-- evaluation calibration from accepted/rejected decisions;
+- evaluation calibration from accepted and rejected decisions;
 - dedicated worker queue.
 
 ## Explicitly deferred
 
-- automatic application submission;
-- stealth browser automation;
-- CAPTCHA bypass;
-- storing marketplace passwords;
-- mass outreach;
-- autonomous price commitments;
-- multi-user SaaS features.
+- autonomous application submission;
+- automatic pricing commitments;
+- multi-user SaaS features;
+- building a dashboard before the search and Telegram flows are validated.
