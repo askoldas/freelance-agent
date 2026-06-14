@@ -5,16 +5,27 @@
 Freelance Agent is a code-first TypeScript application. The core system does not depend on n8n.
 
 ```text
-Telegram / future dashboard / scheduled collectors
-                    |
-                    v
-             Application API
-                    |
-          Domain use cases and rules
-          /         |          \
-         v          v           v
-     Supabase   OpenRouter    Tavily
+Scheduled collectors / manual fallback
+                 |
+                 v
+        Source adapters and search
+                 |
+                 v
+       Normalize and deduplicate
+                 |
+                 v
+        Extract and evaluate
+                 |
+        +--------+--------+
+        |                 |
+        v                 v
+    Supabase          Telegram
+                           |
+                           v
+                   Proposal on request
 ```
+
+The first useful product behavior is automatic discovery. Telegram is primarily the review and control interface, not the main source of opportunities.
 
 ## Recommended runtime
 
@@ -24,51 +35,65 @@ The first version may be deployed to Vercel. Long-running or high-volume workers
 
 ## Main components
 
-### Telegram adapter
+### Scheduled search coordinator
 
 Responsibilities:
 
-- receive webhook updates;
-- verify the Telegram webhook secret;
-- authorize configured Telegram user IDs;
-- parse commands, messages, URLs, and callback buttons;
-- render concise result messages;
-- delegate all business logic to use cases.
+- run configured search tracks on schedule;
+- call one or more source adapters;
+- keep each run bounded;
+- prevent overlapping or duplicate processing;
+- record run status and provider errors;
+- pass new results to the ingestion pipeline.
 
-It must not contain project evaluation logic or large AI prompts.
+### Source adapters
 
-### Opportunity ingestion
+Initial adapter:
 
-Input sources initially include:
-
-- pasted project descriptions;
-- manually submitted URLs;
-- Telegram forwarded text.
+- Tavily public web search.
 
 Later adapters may include:
 
-- Tavily public web search;
-- Gmail alert ingestion;
-- public feeds and permitted APIs;
-- a browser extension or share-to-agent action.
+- alert-email ingestion;
+- public feeds and supported APIs;
+- direct adapters for useful project sources;
+- a browser-to-agent submission path.
 
-Every source must return a common normalized input shape.
+Every source returns a common normalized result shape.
 
-### URL handling
+### Search-track configuration
 
-For milestone one, URL ingestion should be conservative:
+Search tracks should be data-driven rather than hardcoded into route handlers.
 
-1. detect that the message contains a URL;
-2. try to retrieve public text using a bounded, safe fetcher;
-3. reject unsupported protocols and local/private addresses;
-4. limit redirects, response size, and timeout;
-5. fall back to asking the user to paste the listing when content is unavailable or login-protected.
+Each track may define:
 
-Do not attempt authenticated browsing in milestone one.
+- name and category;
+- search queries;
+- included or excluded domains;
+- language and region hints;
+- result limit;
+- minimum prefilter score;
+- notification threshold;
+- enabled state;
+- last run metadata.
+
+### Opportunity ingestion
+
+The ingestion pipeline:
+
+1. validates a source result;
+2. derives source identity and canonical URL;
+3. creates a content fingerprint;
+4. checks for existing opportunities;
+5. applies deterministic prefilters;
+6. stores or updates the normalized opportunity;
+7. sends qualifying results to extraction and evaluation.
+
+Manual Telegram text or URL submission uses the same ingestion pipeline as a secondary fallback.
 
 ### Extraction service
 
-Converts unstructured text into structured project facts:
+Converts source content into structured project facts:
 
 - title;
 - client or company when present;
@@ -82,43 +107,50 @@ Converts unstructured text into structured project facts:
 - explicit constraints;
 - missing information.
 
-Extraction should be separate from evaluation to reduce hallucination and make testing easier.
+Extraction should be separate from evaluation.
 
 ### Evaluation service
 
-Uses the normalized opportunity, candidate profile, capability records, preferences, and selected portfolio items.
+Uses the normalized opportunity, candidate profile, capabilities, preferences, and selected portfolio items.
 
-It returns a validated structured assessment. Deterministic rules then apply caps or penalties where needed.
+It returns a validated structured assessment. Deterministic rules then apply caps or penalties.
 
-Examples of deterministic rules:
+Examples:
 
-- unpaid or commission-only work cannot receive a priority recommendation;
-- missing budget should be flagged but not automatically rejected;
-- blocked categories or unsafe work should be rejected;
-- an evaluation with high delivery risk cannot be `priority`;
-- scores must remain between 0 and 100.
+- clearly irrelevant results should not consume a full evaluation call;
+- unpaid or unrealistic work cannot receive a priority recommendation;
+- missing budget is flagged but does not automatically reject a project;
+- high delivery risk cannot produce a `priority` recommendation;
+- scores remain between 0 and 100.
 
 ### Solution advisor
 
-Suggests one to three plausible approaches. Each suggestion should include:
+Suggests one to three plausible approaches. Each suggestion includes:
 
 - summary;
 - likely stack or services;
-- why it fits the project;
+- why it fits;
 - key trade-offs;
-- unknowns that must be clarified.
+- unknowns to clarify.
 
-The advisor may recommend the client's requested stack, a preferred stack, or another suitable approach. It must not imply that a suggestion is a final architecture before requirements are clarified.
+The advisor may recommend the client's stack, a preferred stack, or another suitable approach.
+
+### Telegram adapter
+
+Responsibilities:
+
+- receive webhook updates and callbacks;
+- authorize configured Telegram user IDs;
+- send high-value project notifications;
+- provide actions such as proposal, save, reject, details, and open source;
+- support manual submission as a fallback;
+- delegate business logic to use cases.
+
+It must not contain prompts, SQL, or scoring logic.
 
 ### Proposal writer
 
-Generates reviewable proposals from:
-
-- opportunity facts;
-- evaluation;
-- selected verified capabilities;
-- selected portfolio items;
-- user instructions such as shorter, more technical, or different pricing framing.
+Generates reviewable proposals from opportunity facts, evaluation, verified capabilities, selected portfolio items, and user instructions.
 
 Proposals are stored with model and prompt metadata.
 
@@ -126,7 +158,7 @@ Proposals are stored with model and prompt metadata.
 
 Use Supabase/PostgreSQL with repository interfaces. Keep database operations behind a domain-friendly data layer.
 
-Use the service-role key only on the server. A client-side dashboard should use a separate authenticated Supabase client and row-level security when introduced.
+Use the service-role key only on the server.
 
 ## Suggested directory structure
 
@@ -137,18 +169,21 @@ src/
       health/route.ts
       telegram/webhook/route.ts
       cron/search/route.ts
-      cron/follow-ups/route.ts
   config/
     env.ts
   domain/
+    sources/
+    search-tracks/
     opportunities/
     evaluations/
     proposals/
     profiles/
   use-cases/
-    ingest-opportunity.ts
+    run-project-search.ts
+    ingest-search-result.ts
     evaluate-opportunity.ts
     generate-proposal.ts
+    submit-manual-opportunity.ts
   services/
     ai/
     search/
@@ -162,89 +197,77 @@ supabase/
 tests/
 ```
 
-The exact structure can evolve, but framework handlers must remain thin.
-
 ## External service interfaces
 
 ### AI provider
 
-Define an interface that supports:
+Support structured generation, model selection, timeouts, limited retries, usage metadata, and normalized errors.
 
-- structured generation;
-- model selection;
-- timeout and limited retries;
-- usage metadata;
-- provider error normalization.
-
-The first adapter uses OpenRouter, but domain code must not depend directly on its HTTP response shape.
+The first adapter uses OpenRouter, but domain code must not depend on its response shape.
 
 ### Search provider
 
-Define a source-neutral interface. The first public-search adapter uses Tavily.
+Define a source-neutral interface. The first adapter uses Tavily.
 
 ### Database repositories
 
-Prefer small repositories grouped by aggregate rather than one generic database client used everywhere.
+Prefer repositories grouped by aggregate rather than a generic database client used throughout the application.
 
 ### Telegram client
 
-Wrap message formatting, editing, callback acknowledgement, and inline keyboards.
+Wrap notification formatting, message editing, callback acknowledgement, and inline keyboards.
 
 ## Scheduling
 
 Initial scheduled work can use Vercel Cron or another authenticated HTTP scheduler.
 
-Cron routes must:
+Scheduled routes must:
 
 - verify a secret;
 - be idempotent;
 - process bounded batches;
 - record run status;
-- return before platform timeouts;
-- avoid overlapping runs where possible.
+- avoid overlapping runs where possible;
+- return before platform timeouts.
+
+## Notification policy
+
+- strong matches: notify individually;
+- medium matches: optionally include in a digest;
+- weak or duplicate results: do not notify;
+- provider or pipeline failures: send a compact operational alert only when action is required.
 
 ## Observability
 
-Record:
+Record correlation ID, search track, source type, opportunity ID, workflow stage, elapsed time, model and prompt version, and normalized outcome.
 
-- correlation ID;
-- source type;
-- opportunity ID;
-- workflow stage;
-- elapsed time;
-- model and prompt version;
-- success or normalized error code.
-
-Never log secrets or full private messages unless explicitly configured for local development with redaction.
+Never log secrets or unredacted sensitive content.
 
 ## Reliability
 
 - validate all external input;
-- use bounded retries with backoff for transient failures;
-- avoid retrying invalid user data;
-- make insert operations idempotent;
+- use bounded retries for transient failures;
+- make discovery and ingestion idempotent;
+- avoid repeated notifications;
 - acknowledge Telegram callbacks promptly;
-- store workflow errors where they can be reviewed;
-- degrade gracefully when a model or search provider is unavailable.
+- store workflow errors for review;
+- degrade gracefully when a provider is unavailable.
 
 ## Security
 
 - Telegram is single-user by default;
 - authorize by numeric Telegram user ID;
 - use a webhook secret token;
-- prevent SSRF in URL fetching;
-- limit fetched content size;
-- keep service-role credentials server-only;
-- validate cron secrets;
-- never store marketplace passwords in this application;
-- do not implement CAPTCHA bypass or stealth scraping.
+- keep service credentials server-only;
+- validate scheduled requests;
+- prevent unsafe URL fetching;
+- do not commit private integration data.
 
 ## Future extensions
 
-- Gmail OAuth collector;
+- alert-email collector;
 - authenticated dashboard;
 - feedback-driven scoring calibration;
 - application and follow-up tracking;
-- permitted marketplace APIs;
-- browser extension for sending the current listing to the agent;
-- dedicated background worker and queue when volume requires it.
+- additional supported project-source integrations;
+- dedicated worker and queue when volume requires it.
