@@ -1,107 +1,210 @@
-# Codex Task 01: Bootstrap the application
+# Codex Task 01: Build the first working Project Agent
 
-Read `AGENTS.md`, `README.md`, `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/DATA_MODEL.md`, `docs/ROADMAP.md`, and `docs/CODEX_WORKFLOW.md` before making changes.
+Read `AGENTS.md`, `README.md`, `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/DATA_MODEL.md`, `docs/ROADMAP.md`, `docs/UI.md`, and `docs/CODEX_WORKFLOW.md` before changing code.
 
 ## Goal
 
-Create the reliable TypeScript application foundation for Freelance Agent.
+Build the first usable version of Freelance Agent, not an empty application shell.
 
-This milestone does not implement project search, Supabase tables, OpenRouter calls, Telegram behavior, or a dashboard. It creates the shell those features will use.
+The completed milestone must automatically search for available projects, store and deduplicate them, evaluate promising opportunities, display them in a minimal internal dashboard, and send strong matches to Telegram.
 
-## Required implementation
+Manual project submission is optional and secondary. The main flow must work without the user supplying each project.
 
-Create a current stable Next.js App Router application with:
+## Technology
 
-- TypeScript in strict mode;
-- `src/` directory layout;
-- server-side route handlers;
-- ESLint;
-- Prettier or an equivalent consistent formatter;
-- Vitest for unit tests;
-- Zod-based environment validation;
-- structured server-side logging;
-- a health endpoint;
+Use:
+
+- current stable Next.js App Router;
+- TypeScript with strict type checking;
+- Supabase/PostgreSQL;
+- Tavily as the initial public-search provider;
+- OpenRouter for structured extraction and evaluation;
+- Telegram Bot API for notifications and actions;
+- Zod for external and model-output validation;
+- Vitest for tests.
+
+## Styling
+
+Use custom CSS only.
+
+- Use `globals.css`, CSS custom properties, and CSS Modules.
+- Do not install or configure Tailwind.
+- Do not use Bootstrap, Material UI, Chakra UI, shadcn/ui, styled-components, or another design system or CSS framework.
+- Follow `docs/UI.md`.
+
+## Required product flow
+
+```text
+Protected scheduled or manual search trigger
+→ load enabled search tracks
+→ search through Tavily
+→ normalize results
+→ canonicalize URLs and remove duplicates
+→ apply inexpensive deterministic prefilters
+→ store new candidates in Supabase
+→ use OpenRouter to extract and evaluate promising projects
+→ store evaluations and solution options
+→ show opportunities in a minimal dashboard
+→ notify Telegram when a result passes the notification threshold
+```
+
+## Application foundation
+
+Create the application foundation as part of this real feature implementation:
+
+- Next.js App Router with `src/`;
+- strict TypeScript;
+- ESLint and formatting;
+- environment validation;
+- structured server logging;
 - `.env.example`;
-- GitHub Actions CI for install, lint, typecheck, and tests;
-- package scripts for development and all validation commands.
+- useful package scripts;
+- GitHub Actions CI;
+- health endpoint.
 
-## Architecture requirements
+Do not treat these as a separate milestone or spend time creating unused placeholder abstractions.
 
-Create initial directories that reflect the documented boundaries, without filling them with speculative implementations:
+## Database
 
-- `src/config`
-- `src/domain`
-- `src/use-cases`
-- `src/services`
-- `src/prompts`
-- `src/lib`
-- `supabase/migrations`
-- `tests`
+Create Supabase migrations for the records required by this milestone:
 
-Keep route handlers thin.
+- candidate profile;
+- capabilities;
+- sources;
+- search tracks;
+- opportunities;
+- evaluations;
+- solution options;
+- agent runs;
+- notification state.
 
-## Environment validation
+Include the minimum proposal and portfolio structures only when they are genuinely required by the evaluation flow. Avoid building the full later-stage application-tracking system prematurely.
 
-Create a server-only environment schema that can eventually support:
+Implement:
 
-- Supabase URL and service-role key;
-- Tavily API key;
-- OpenRouter API key and model names;
-- Telegram bot token, webhook secret, and authorized user IDs;
-- cron secret;
-- application base URL.
+- useful constraints and indexes;
+- source identity;
+- canonical URL handling;
+- content fingerprinting;
+- idempotent opportunity ingestion;
+- search-run recording;
+- prevention of duplicate notifications.
 
-Not every variable must be required during the bootstrap milestone. Separate variables required to start the basic application from variables required by later integrations. The health endpoint must work before third-party credentials are configured.
+Add replaceable example profile and capability seed data. Do not invent achievements or client results.
 
-Never expose server secrets through `NEXT_PUBLIC_` variables.
+## Search tracks
 
-## Health endpoint
+Create configurable initial tracks for:
 
-Add `GET /api/health` returning a small JSON response with:
+- web applications and business platforms;
+- completion or repair of existing projects;
+- CMS and content systems;
+- AI agents and workflow automation;
+- non-AI business automation;
+- APIs and integrations;
+- agency subcontracting;
+- technical consulting.
 
-- status;
-- application name;
-- current timestamp;
-- environment name or mode.
+Queries should include business outcomes and project-request language, not only technology names.
 
-Do not expose configuration values or secrets.
+## AI evaluation
 
-## Logging
+Separate factual extraction from evaluation where practical.
 
-Create a small structured logger abstraction suitable for server routes and future background jobs. It should support context fields and error serialization without logging secret-bearing request headers.
+Validate structured outputs with Zod and store:
 
-Do not add a heavy observability platform in this milestone.
+- concise summary;
+- primary and secondary categories;
+- direct, adjacent, learnable, or risky fit;
+- score from 0 to 100;
+- match reasons;
+- gaps and uncertainties;
+- delivery risks;
+- learning effort;
+- budget and scope observations;
+- suggested client questions;
+- recommendation;
+- one to three plausible solution options;
+- model and prompt version metadata.
+
+Apply deterministic rules after model output. Avoid AI calls for duplicates and obviously irrelevant results.
+
+## Telegram
+
+Implement Telegram as the notification and control interface.
+
+Requirements:
+
+- authorize only configured Telegram user IDs;
+- verify the webhook secret;
+- send strong matches automatically;
+- include title, score, fit, source, reasons, risks, and source link;
+- include actions for save, reject, details, and proposal placeholder;
+- acknowledge callbacks quickly;
+- do not send applications or outreach.
+
+The proposal button may clearly report that proposal generation belongs to the next milestone if proposal generation is not implemented here.
+
+## Dashboard
+
+Create a minimal authenticated or securely private operational dashboard suitable for a single-user MVP.
+
+Show:
+
+- recent opportunities;
+- score and recommendation;
+- category and fit level;
+- source and discovery time;
+- evaluation summary;
+- recent search-run status;
+- a protected development action to run a search manually.
+
+Use custom CSS Modules and provide responsive empty, loading, success, and error states.
+
+Do not build a marketing page or a large admin system.
+
+## Scheduling
+
+Add a protected search endpoint suitable for Vercel Cron or another scheduler.
+
+It must:
+
+- validate a secret;
+- process bounded work;
+- avoid overlapping runs where practical;
+- record partial failures;
+- return a concise run summary.
 
 ## Tests
 
 At minimum test:
 
-- environment parsing for valid minimal configuration;
-- clear failure for invalid values;
-- health response construction if logic is separated from the route;
-- any logger redaction utility introduced.
+- environment validation;
+- search-track validation;
+- Tavily response normalization using fixtures;
+- URL canonicalization and fingerprint stability;
+- deterministic prefilters;
+- idempotent ingestion;
+- evaluation-output validation;
+- deterministic score adjustments;
+- cron authorization;
+- Telegram authorization and callback parsing;
+- duplicate-notification prevention.
 
-## CI
-
-Add a GitHub Actions workflow triggered for pushes and pull requests. It should use the repository lockfile and run:
-
-1. install;
-2. formatting check if configured;
-3. lint;
-4. typecheck;
-5. tests.
+Mock external APIs in tests.
 
 ## Documentation
 
-Update `README.md` with:
+Update the README with:
 
-- local installation;
-- development command;
-- validation commands;
-- environment-file setup;
-- current milestone status.
-
-Do not replace the existing product overview.
+- local setup;
+- Supabase migration and seed instructions;
+- required environment variables;
+- Tavily, OpenRouter, and Telegram setup;
+- local and scheduled search commands;
+- webhook setup;
+- deployment notes;
+- known limitations.
 
 ## Process
 
@@ -109,19 +212,28 @@ Before coding:
 
 1. inspect the repository;
 2. summarize the current state;
-3. propose the exact package choices and file tree;
-4. identify assumptions;
-5. then implement.
+3. propose the concrete architecture, package choices, database scope, and file tree;
+4. identify risks and assumptions;
+5. ensure the plan contains no Tailwind or separate bootstrap-only phase;
+6. then implement.
 
-After coding, run all validation commands and report their exact results.
+After coding:
+
+1. run formatting, linting, type checking, tests, and production build;
+2. report exact results;
+3. list changed files by subsystem;
+4. list external setup still required;
+5. identify incomplete or unverified behavior honestly.
 
 ## Exit criteria
 
-- the application starts locally;
-- `/api/health` works;
-- strict type checking passes;
-- formatting and linting pass;
-- tests pass;
-- CI configuration is present;
-- no real credentials or generated build artifacts are committed;
-- no project-search or AI features are prematurely implemented.
+- the agent automatically discovers real project candidates;
+- duplicates are not repeatedly inserted or notified;
+- promising candidates are evaluated and stored;
+- strong matches can reach Telegram;
+- the minimal dashboard displays stored opportunities and run status;
+- all UI uses custom CSS or CSS Modules;
+- Tailwind and UI frameworks are absent;
+- lint, typecheck, tests, and build pass;
+- no real credentials are committed;
+- no application is sent automatically.
