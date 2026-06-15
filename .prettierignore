@@ -1,0 +1,9 @@
+AGENTS.md
+README.md
+codex/
+docs/
+.next/
+node_modules/
+coverage/
+supabase/.temp/
+data/professional-profile.json

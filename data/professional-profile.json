@@ -1,0 +1,737 @@
+{
+  "schemaVersion": "1.0.0",
+  "profile": {
+    "name": "Askold Makrikov",
+    "location": "Riga, Latvia",
+    "timezone": "Europe/Riga",
+    "remoteReady": true,
+    "headline": "Full-stack web developer and AI automation specialist",
+    "shortSummary": "Full-stack web developer and automation specialist with approximately 20 years of experience in web development, CMS platforms, ecommerce, integrations and digital business systems.",
+    "fullSummary": "Askold combines long-term web-development experience with business operations, process optimization and automation. He has delivered more than 15 freelance projects using WordPress, PrestaShop and Shopify, and more recently has worked with React, Next.js, Firebase, Supabase, custom CMS solutions and AI-assisted workflows. His operations background includes onboarding, documentation, payments, KYC/AML, workflow coordination and process improvement, which helps him translate business needs into practical technical systems.",
+    "portfolioUrl": "https://askold.me",
+    "contact": {
+      "email": "makrikovas@gmail.com",
+      "phone": "+371 288 78 495"
+    },
+    "preferredWorkTypes": [
+      "freelance projects",
+      "contract work",
+      "part-time remote work",
+      "project-based consulting"
+    ],
+    "availabilityNotes": "Open to web development, ecommerce, CMS, integrations, AI automation and business-process automation projects.",
+    "status": "approved"
+  },
+  "overallExperience": [
+    {
+      "id": "web-development",
+      "area": "Web development",
+      "startYear": 2005,
+      "yearsApproximate": 20,
+      "summary": "Approximately 20 years of practical web-development experience across business websites, ecommerce, CMS platforms, landing pages, custom interfaces and digital products.",
+      "publicClaim": "Around 20 years of web-development experience.",
+      "status": "approved"
+    },
+    {
+      "id": "cms-ecommerce-projects",
+      "area": "CMS and ecommerce",
+      "minimumProjectCount": 15,
+      "exactCount": false,
+      "summary": "Delivered more than 15 freelance projects using WordPress, PrestaShop and Shopify.",
+      "workTypes": [
+        "business websites",
+        "ecommerce websites",
+        "landing pages",
+        "CMS customization",
+        "theme customization",
+        "frontend implementation",
+        "third-party integrations",
+        "maintenance and updates"
+      ],
+      "platforms": [
+        "WordPress",
+        "WooCommerce",
+        "PrestaShop",
+        "Shopify"
+      ],
+      "publicClaim": "Delivered more than 15 WordPress, PrestaShop and Shopify projects.",
+      "status": "approved"
+    },
+    {
+      "id": "business-operations",
+      "area": "Business operations and process improvement",
+      "summary": "Experience in onboarding, documentation, customer support, payments, KYC/AML, workflow coordination, supplier communication, logistics and operational process improvement.",
+      "publicClaim": "Strong business-operations background with experience improving workflows and coordinating cross-functional processes.",
+      "status": "approved"
+    },
+    {
+      "id": "automation-ai",
+      "area": "AI and workflow automation",
+      "summary": "Practical experience designing AI-assisted workflows, process automations, research systems, information grouping, structured storage and human approval flows.",
+      "publicClaim": "Experience designing and implementing AI-assisted workflow automation.",
+      "status": "approved"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "Full-stack web development",
+      "category": "web_development",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Business websites and service platforms",
+      "category": "web_development",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Web application engineering",
+      "category": "web_development",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Existing project completion, debugging and repair",
+      "category": "web_development",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Custom CMS development",
+      "category": "cms",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "WordPress development and customization",
+      "category": "cms",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "WooCommerce development and integrations",
+      "category": "ecommerce",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "PrestaShop development",
+      "category": "ecommerce",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Shopify setup, customization and integrations",
+      "category": "ecommerce",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Frontend implementation from designs",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Responsive UI with custom CSS",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Multilingual websites and applications",
+      "category": "web_development",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Authentication and account areas",
+      "category": "backend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "REST APIs, webhooks and third-party integrations",
+      "category": "integration",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Business-process automation",
+      "category": "automation",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "AI workflow and agent design",
+      "category": "automation",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Telegram bots and integrations",
+      "category": "automation",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Lead research and sales automation",
+      "category": "automation",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "MVP planning and technical architecture",
+      "category": "consulting",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Requirements clarification and project scoping",
+      "category": "consulting",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Workflow optimization and process design",
+      "category": "operations",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "UI/UX and visual implementation",
+      "category": "design",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Brand and marketing asset design",
+      "category": "design",
+      "proficiency": "working",
+      "status": "approved"
+    }
+  ],
+  "technologies": [
+    {
+      "name": "Next.js",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "React",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "JavaScript",
+      "category": "language",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "TypeScript",
+      "category": "language",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "HTML",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "CSS",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "SASS",
+      "category": "frontend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Firebase",
+      "category": "backend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Firestore",
+      "category": "backend",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Supabase",
+      "category": "backend",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "database",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "WordPress",
+      "category": "cms",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "WooCommerce",
+      "category": "ecommerce",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "PrestaShop",
+      "category": "ecommerce",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Shopify",
+      "category": "ecommerce",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Payload CMS",
+      "category": "cms",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Airtable",
+      "category": "automation",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Telegram Bot API",
+      "category": "automation",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "OpenRouter",
+      "category": "ai",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Tavily",
+      "category": "search",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Adobe Photoshop",
+      "category": "design",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Adobe Illustrator",
+      "category": "design",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Adobe InDesign",
+      "category": "design",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "After Effects",
+      "category": "design",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Figma",
+      "category": "design",
+      "proficiency": "working",
+      "status": "approved"
+    },
+    {
+      "name": "Google Workspace",
+      "category": "operations",
+      "proficiency": "strong",
+      "status": "approved"
+    },
+    {
+      "name": "Microsoft Office",
+      "category": "operations",
+      "proficiency": "strong",
+      "status": "approved"
+    }
+  ],
+  "experienceEntries": [
+    {
+      "id": "freelance-web",
+      "company": "Self-employed / Freelance",
+      "role": "Web Developer and Digital Product Designer",
+      "startYear": 2005,
+      "endYear": null,
+      "employmentType": "freelance",
+      "summary": "Designed and developed websites, ecommerce projects, landing pages, UI systems, brand assets and custom digital solutions for clients.",
+      "responsibilities": [
+        "Built and maintained websites using WordPress, WooCommerce, PrestaShop, Shopify, React and Next.js.",
+        "Implemented responsive frontend interfaces from design concepts.",
+        "Structured content, navigation and layouts for usability, performance and scalability.",
+        "Created visual identities, marketing assets and interface systems.",
+        "Integrated third-party services, payments, APIs and CMS functionality."
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "create-and-scribe",
+      "company": "Create and Scribe OU / Colibrix Limited",
+      "role": "Web Developer / Onboarding and Documentation Specialist",
+      "startYear": 2024,
+      "endYear": 2025,
+      "employmentType": "employment",
+      "summary": "Combined web-development, documentation, onboarding and workflow-improvement responsibilities.",
+      "responsibilities": [
+        "Developed and maintained client websites and landing pages.",
+        "Created and managed a custom Airtable project and task-management workflow.",
+        "Managed onboarding documentation and verification workflows.",
+        "Improved internal process visibility and coordination."
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "nets",
+      "company": "Nets Denmark A/S Lietuvos filialas",
+      "role": "Onboarding and KYC Specialist",
+      "startYear": 2021,
+      "endYear": 2023,
+      "employmentType": "employment",
+      "summary": "Supported merchant onboarding, digital payments integration, KYC/KYB verification, AML screening and process improvement.",
+      "responsibilities": [
+        "Supported merchants during onboarding and early platform integration.",
+        "Reviewed company documentation and UBO information.",
+        "Performed AML and risk screening.",
+        "Resolved onboarding and transaction-related issues.",
+        "Improved onboarding, follow-up and debt-collection workflows."
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "litada",
+      "company": "Litada SIA",
+      "role": "Customer Support Specialist / Coordinator",
+      "startYear": 2019,
+      "endYear": 2020,
+      "employmentType": "employment",
+      "summary": "Managed customer support, returns, after-sales coordination and internal service procedures.",
+      "responsibilities": [
+        "Handled customer inquiries and after-sales cases.",
+        "Coordinated with sales and logistics teams.",
+        "Maintained customer interaction and return records.",
+        "Supported implementation of reporting and service procedures."
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "baltictex",
+      "company": "Baltictex SIA",
+      "role": "Business and Digital Operations Manager",
+      "startYear": 2006,
+      "endYear": 2018,
+      "employmentType": "employment",
+      "summary": "Managed daily business operations, sales coordination, procurement, logistics, supplier relationships, digital tools and internal workflow improvements.",
+      "responsibilities": [
+        "Managed purchasing, supplier communication and logistics.",
+        "Maintained stock and inventory processes.",
+        "Prepared customs and international logistics documentation.",
+        "Developed and maintained the company website.",
+        "Designed internal stock-management tools and interfaces.",
+        "Introduced digital tools and workflow improvements."
+      ],
+      "status": "approved"
+    }
+  ],
+  "cases": [
+    {
+      "id": "ilab",
+      "title": "iLab.lv Service Platform",
+      "type": "client_project",
+      "url": "https://ilab.lv",
+      "status": "approved",
+      "projectStatus": "deployed_active_development",
+      "clientType": "Electronics repair service",
+      "publicVisibility": true,
+      "role": [
+        "Full-stack developer",
+        "Product implementer",
+        "Technical architect"
+      ],
+      "businessProblem": "The business needed a multilingual service website with structured service, device and pricing content that could be maintained without editing code.",
+      "solution": "Developed and deployed a custom web platform with a custom CMS, structured service and device pages, multilingual content management and ongoing SEO-oriented improvements.",
+      "features": [
+        "Custom CMS",
+        "Multilingual content",
+        "Device and service pages",
+        "Admin content management",
+        "Structured pricing content",
+        "SEO-oriented page architecture",
+        "Deployment and maintenance"
+      ],
+      "technologies": [
+        "Next.js",
+        "React",
+        "JavaScript",
+        "Firebase",
+        "Firestore",
+        "Custom CSS"
+      ],
+      "results": [
+        {
+          "claim": "Website traffic increased by more than 300%.",
+          "status": "approved",
+          "publicUseAllowed": false,
+          "evidenceSource": null,
+          "comparisonPeriod": null
+        }
+      ],
+      "proposalSafeSummary": "Developed and deployed a multilingual repair-service platform with a custom CMS, structured service and device content, and ongoing SEO and product improvements."
+    },
+    {
+      "id": "riga-ilab",
+      "title": "Riga iLab Landing Page",
+      "type": "client_project",
+      "url": "https://riga.ilab.lv",
+      "status": "approved",
+      "projectStatus": "deployed",
+      "clientType": "Electronics repair service",
+      "publicVisibility": true,
+      "role": [
+        "Web developer",
+        "UI implementer"
+      ],
+      "businessProblem": "The business needed a focused local landing page with a clearer visual direction and stronger presentation.",
+      "solution": "Designed and developed a local landing page that defines the intended design direction for the main iLab website.",
+      "features": [
+        "Local service landing page",
+        "Responsive design",
+        "SEO-oriented content structure",
+        "Visual direction for the main website"
+      ],
+      "technologies": [
+        "Next.js",
+        "React",
+        "Custom CSS"
+      ],
+      "results": [],
+      "proposalSafeSummary": "Designed and developed a focused local service landing page that now serves as the visual direction for the broader iLab platform."
+    },
+    {
+      "id": "medical-holding-automation",
+      "title": "AI-Assisted Sales and Research Automation",
+      "type": "confidential_client_project",
+      "url": null,
+      "status": "approved",
+      "projectStatus": "implemented",
+      "clientType": "Latvian medical holding",
+      "clientName": null,
+      "confidential": true,
+      "publicVisibility": true,
+      "role": [
+        "Automation developer",
+        "Solution designer"
+      ],
+      "businessProblem": "Reduce manual work in prospect research, information collection, grouping and outreach preparation.",
+      "solution": "Designed and implemented an AI-assisted automation workflow for prospect discovery, structured information collection, grouping, storage and outreach-draft preparation.",
+      "features": [
+        "Prospect research",
+        "Information collection",
+        "Lead grouping",
+        "Structured storage",
+        "Outreach draft preparation",
+        "Human approval workflow"
+      ],
+      "technologies": [
+        "AI models",
+        "Workflow automation",
+        "Telegram",
+        "APIs",
+        "Structured data storage"
+      ],
+      "results": [],
+      "proposalSafeSummary": "Designed and implemented an AI-assisted automation system for a Latvian medical holding, focused on prospect research, structured data collection and outreach preparation."
+    },
+    {
+      "id": "freelance-agent",
+      "title": "Freelance Project Discovery Agent",
+      "type": "personal_project",
+      "url": null,
+      "status": "approved",
+      "projectStatus": "active_development",
+      "publicVisibility": true,
+      "role": [
+        "Product developer",
+        "Automation developer",
+        "System designer"
+      ],
+      "businessProblem": "Freelance opportunities are fragmented across many sources and require repetitive manual review.",
+      "solution": "Built a personal agent that searches for projects, filters irrelevant results, evaluates fit and stores qualified opportunities.",
+      "features": [
+        "Automated project search",
+        "Opportunity classification",
+        "Duplicate detection",
+        "AI-assisted evaluation",
+        "Telegram notifications",
+        "Supabase storage",
+        "Search-track configuration"
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Tavily",
+        "OpenRouter",
+        "Telegram"
+      ],
+      "results": [],
+      "proposalSafeSummary": "Building a personal AI-assisted agent that discovers, filters and evaluates freelance opportunities using Tavily, OpenRouter, Supabase and Telegram."
+    },
+    {
+      "id": "airtable-workflow",
+      "title": "Custom Airtable Project and Task Management System",
+      "type": "internal_system",
+      "url": null,
+      "status": "approved",
+      "projectStatus": "implemented",
+      "publicVisibility": true,
+      "role": [
+        "Process designer",
+        "System implementer"
+      ],
+      "businessProblem": "The team needed clearer task tracking, workflow visibility and coordination.",
+      "solution": "Designed and implemented a custom Airtable project and task-management system tailored to the internal workflow.",
+      "features": [
+        "Task tracking",
+        "Workflow status",
+        "Team coordination",
+        "Structured records",
+        "Process visibility"
+      ],
+      "technologies": [
+        "Airtable"
+      ],
+      "results": [],
+      "proposalSafeSummary": "Designed and implemented a custom Airtable project and task-management system to improve workflow visibility and coordination."
+    },
+    {
+      "id": "askold-portfolio",
+      "title": "Askold.me Portfolio",
+      "type": "portfolio",
+      "url": "https://askold.me",
+      "status": "approved",
+      "projectStatus": "public_older_portfolio",
+      "publicVisibility": true,
+      "role": [
+        "Web developer",
+        "Designer"
+      ],
+      "businessProblem": null,
+      "solution": "Public portfolio presenting selected web-development, UI and design work.",
+      "features": [],
+      "technologies": [],
+      "results": [],
+      "proposalSafeSummary": "Public portfolio with selected web-development, UI and design work."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Klaipeda University",
+      "program": "Bachelor's in Chemical Engineering",
+      "startYear": 2001,
+      "endYear": 2005,
+      "status": "approved"
+    },
+    {
+      "institution": "Klaipeda University",
+      "program": "Bachelor of Business Management / Corporate Administration",
+      "startYear": 1999,
+      "endYear": 2001,
+      "status": "approved"
+    },
+    {
+      "institution": "RS School",
+      "program": "Front-end Development",
+      "startYear": 2022,
+      "endYear": 2023,
+      "status": "approved"
+    },
+    {
+      "institution": "GoIT",
+      "program": "Advanced HTML & CSS",
+      "startYear": 2020,
+      "endYear": 2020,
+      "status": "approved"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Russian",
+      "level": "native",
+      "status": "approved"
+    },
+    {
+      "name": "Lithuanian",
+      "level": "native",
+      "status": "approved"
+    },
+    {
+      "name": "English",
+      "level": "working_proficiency",
+      "notes": "Strong reading and writing; functional spoken communication.",
+      "status": "approved"
+    }
+  ],
+  "proposalPreferences": {
+    "defaultTone": "professional_direct",
+    "defaultLength": "concise",
+    "maxPortfolioItems": 2,
+    "startWithClientProblem": true,
+    "includeClarifyingQuestion": true,
+    "mentionAdjacentSkillsHonestly": true,
+    "neverInventExperience": true,
+    "avoidPhrases": [
+      "I am passionate",
+      "perfect fit",
+      "expert in everything",
+      "I can do this easily"
+    ]
+  },
+  "claimRules": {
+    "allowedStatusesForPublicDocuments": [
+      "approved"
+    ],
+    "blockedStatusesForPublicDocuments": [
+      "needs_review",
+      "private"
+    ],
+    "forbidTechnologyExperienceInflation": true,
+    "examples": [
+      {
+        "allowed": "Around 20 years of web-development experience."
+      },
+      {
+        "forbidden": "20 years of Next.js experience."
+      }
+    ]
+  }
+}
